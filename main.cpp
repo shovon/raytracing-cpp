@@ -12,10 +12,10 @@
 vec3 color(const ray &r, hitable *world)
 {
   hit_record rec;
-  // std::cerr << rec.normal << " " << rec.p << " " << rec.t << std::endl;
-  if (world->hit(r, 0.0, MAXFLOAT, rec))
+  if (world->hit(r, 0.001, MAXFLOAT, rec))
   {
-    return 0.5 * vec3(rec.normal.x() + 1, rec.normal.y() + 1, rec.normal.z() + 1);
+    vec3 target = rec.p + rec.normal + random_in_unit_sphere();
+    return 0.5 * color(ray(rec.p, target - rec.p), world);
   }
 
   auto unit_direction = r.direction().unit_vector();
@@ -49,10 +49,12 @@ int main()
         col += color(r, world);
       }
       col /= float(ns);
+      col = vec3(sqrt(col.e0), sqrt(col.e1), sqrt(col.e2));
 
       auto ir = int(255.99 * col.e0);
       auto ig = int(255.99 * col.e1);
       auto ib = int(255.99 * col.e2);
+
       std::cout << ir << " " << ig << " " << ib << std::endl;
     }
   }

@@ -2,6 +2,35 @@
 
 #include "vec3.hpp"
 
+float rand_min_max(float min, float max)
+{
+  return min + drand48() * (max - min);
+}
+
+vec3 random_vec3_min_max(float min, float max)
+{
+  vec3 v = {
+      rand_min_max(min, max),
+      rand_min_max(min, max),
+      rand_min_max(min, max)};
+  return v;
+}
+
+vec3 random_in_unit_sphere()
+{
+  vec3 p;
+  while (true)
+  {
+    p = random_vec3_min_max(-1, 1);
+    if (p.dot(p) >= 1)
+    {
+      continue;
+    }
+    break;
+  }
+  return p;
+}
+
 std::ostream &operator<<(std::ostream &os, const vec3 &v)
 {
   os << v.e0 << ", " << v.e1 << ", " << v.e2;
