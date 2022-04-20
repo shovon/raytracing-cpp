@@ -9,7 +9,7 @@ class metal : public material
 public:
   metal(const vec3 &a) : albedo{a} {}
 
-  virtual bool scatter(const ray &r_in, const hit_record &rec, vec3 &attenuation, ray &scattered)
+  virtual bool scatter(const ray &r_in, const hit_record &rec, vec3 &attenuation, ray &scattered) const
   {
     vec3 reflected = reflect(r_in.direction().unit_vector(), rec.normal);
     scattered = ray(rec.p, reflected);
@@ -18,6 +18,6 @@ public:
   }
 
   vec3 albedo;
-}
+};
 
 #endif
