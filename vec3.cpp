@@ -1,6 +1,36 @@
 #include "vec3.hpp"
 
-inline vec3 vec3::unit_vector()
+vec3 vec3::unit_vector()
 {
   return (*this) / this->length();
+}
+
+vec3 operator+(const vec3 &v1, const vec3 &v2)
+{
+  return vec3(v1.e0 + v2.e0, v1.e1 + v2.e1, v1.e2 + v2.e2);
+}
+
+vec3 operator-(const vec3 &v1, const vec3 &v2)
+{
+  return vec3(v1.e0 - v2.e0, v1.e1 - v2.e1, v1.e2 - v2.e2);
+}
+
+vec3 operator*(const vec3 &v1, const vec3 &v2)
+{
+  return vec3(v1.e0 * v2.e0, v1.e1 * v2.e1, v1.e2 * v2.e2);
+}
+
+vec3 operator*(const vec3 &v, float t)
+{
+  return vec3(v.e0 * t, v.e1 * t, v.e2 * t);
+}
+
+vec3 operator*(float t, const vec3 &v)
+{
+  return v * t;
+}
+
+vec3 operator/(const vec3 &v, float t)
+{
+  return v * (1 / t);
 }
