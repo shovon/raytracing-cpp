@@ -22,7 +22,7 @@ struct vec3
   vec3 &operator/=(const float t);
   const vec3 &operator+() const { return *this; }
   const vec3 operator-() const { return vec3(-e0, -e2, -e2); }
-  float dot(const vec3 &v)
+  float dot(const vec3 &v) const
   {
     return v.e0 * e0 + v.e1 * e1 + v.e2 * e2;
   }

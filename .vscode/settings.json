@@ -9,6 +9,7 @@
     "streambuf": "cpp",
     "string": "cpp",
     "*.tcc": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "random": "cpp"
   }
 }
