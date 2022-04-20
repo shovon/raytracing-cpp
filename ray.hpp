@@ -9,6 +9,7 @@ struct ray
   ray(const vec3 &a, const vec3 &b) : a{a}, b{b} {}
   vec3 origin() const { return a; }
   vec3 direction() const { return b; }
+  vec3 point_at_parameter(float t) { return A + t * B; }
 
   vec3 a;
   vec3 b;
