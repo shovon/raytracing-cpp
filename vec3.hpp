@@ -21,7 +21,7 @@ struct vec3
   vec3 &operator/=(const vec3 &v);
   vec3 &operator/=(const float t);
   const vec3 &operator+() const { return *this; }
-  const vec3 operator-() const { return vec3(-e0, -e2, -e2); }
+  const vec3 operator-() const { return vec3(-e0, -e1, -e2); }
   float dot(const vec3 &v) const
   {
     return v.e0 * e0 + v.e1 * e1 + v.e2 * e2;
@@ -30,14 +30,14 @@ struct vec3
   {
     return vec3(
         e1 * v.e2 - e2 * v.e1,
-        -(e0 * v.e2 - e2 * v.e1),
+        -(e0 * v.e2 - e2 * v.e0),
         e0 * v.e1 - e1 * v.e0);
   }
-  float length()
+  float length() const
   {
     return sqrt(dot(*this));
   }
-  vec3 unit_vector();
+  vec3 unit_vector() const;
 
   float e0;
   float e1;

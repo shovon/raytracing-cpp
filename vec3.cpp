@@ -37,7 +37,7 @@ std::ostream &operator<<(std::ostream &os, const vec3 &v)
   return os;
 }
 
-vec3 vec3::unit_vector()
+vec3 vec3::unit_vector() const
 {
   return (*this) / this->length();
 }
@@ -112,10 +112,10 @@ vec3 operator*(const vec3 &v, float t)
 
 vec3 operator*(float t, const vec3 &v)
 {
-  return v * t;
+  return vec3(v.e0 * t, v.e1 * t, v.e2 * t);
 }
 
 vec3 operator/(const vec3 &v, float t)
 {
-  return v * (1 / t);
+  return vec3(v.e0 / t, v.e1 / t, v.e2 / t);
 }
