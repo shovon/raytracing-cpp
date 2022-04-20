@@ -1,5 +1,14 @@
 {
   "files.associations": {
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "__locale": "cpp",
+    "bitset": "cpp",
+    "ios": "cpp",
+    "istream": "cpp",
+    "locale": "cpp",
+    "streambuf": "cpp",
+    "string": "cpp",
+    "*.tcc": "cpp",
+    "iostream": "cpp"
   }
 }

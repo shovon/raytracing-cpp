@@ -1,8 +1,64 @@
+#include <iostream>
+
 #include "vec3.hpp"
+
+std::ostream &operator<<(std::ostream &os, const vec3 &v)
+{
+  os << v.e0 << ", " << v.e1 << ", " << v.e2;
+  return os;
+}
 
 vec3 vec3::unit_vector()
 {
   return (*this) / this->length();
+}
+
+vec3 &vec3::operator+=(const vec3 &v)
+{
+  e0 += v.e0;
+  e1 += v.e1;
+  e2 += v.e2;
+  return *this;
+}
+
+vec3 &vec3::operator-=(const vec3 &v)
+{
+  e0 -= v.e0;
+  e1 -= v.e1;
+  e2 -= v.e2;
+  return *this;
+}
+
+vec3 &vec3::operator*=(const vec3 &v)
+{
+  e0 *= v.e0;
+  e1 *= v.e1;
+  e2 *= v.e2;
+  return *this;
+}
+
+vec3 &vec3::operator*=(const float t)
+{
+  e0 *= t;
+  e1 *= t;
+  e2 *= t;
+  return *this;
+}
+
+vec3 &vec3::operator/=(const vec3 &v)
+{
+  e0 /= v.e0;
+  e1 /= v.e1;
+  e2 /= v.e2;
+  return *this;
+}
+
+vec3 &vec3::operator/=(const float t)
+{
+  e0 /= t;
+  e1 /= t;
+  e2 /= t;
+  return *this;
 }
 
 vec3 operator+(const vec3 &v1, const vec3 &v2)

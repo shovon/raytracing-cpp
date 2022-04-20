@@ -1,6 +1,7 @@
 #ifndef VEC3_HPP
 #define VEC3_HPP
 
+#include <iostream>
 #include <cmath>
 
 struct vec3
@@ -12,6 +13,13 @@ struct vec3
   float y() { return e1; }
   float z() { return e2; }
 
+  friend std::ostream &operator<<(std::ostream &os, const vec3 &v);
+  vec3 &operator+=(const vec3 &v);
+  vec3 &operator-=(const vec3 &v);
+  vec3 &operator*=(const vec3 &v);
+  vec3 &operator*=(const float t);
+  vec3 &operator/=(const vec3 &v);
+  vec3 &operator/=(const float t);
   const vec3 &operator+() const { return *this; }
   const vec3 operator-() const { return vec3(-e0, -e2, -e2); }
   float dot(const vec3 &v)

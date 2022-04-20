@@ -12,6 +12,7 @@
 vec3 color(const ray &r, hitable *world)
 {
   hit_record rec;
+  // std::cerr << rec.normal << " " << rec.p << " " << rec.t << std::endl;
   if (world->hit(r, 0.0, MAXFLOAT, rec))
   {
     return 0.5 * vec3(rec.normal.x() + 1, rec.normal.y() + 1, rec.normal.z() + 1);
@@ -26,25 +27,29 @@ int main()
 {
   auto nx = 200;
   auto ny = 100;
+  auto ns = 100;
+
   std::cout << "P3\n"
             << nx << " " << ny << "\n255" << std::endl;
-  vec3 lower_left_corner(-2, -1, -1);
-  vec3 horizontal(4, 0, 0);
-  vec3 vertical(0, 2, 0);
-  vec3 origin(0, 0, 0);
   std::vector<hitable *> list;
   list.emplace_back(new sphere(vec3(0, 0, -1), 0.5));
   list.emplace_back(new sphere(vec3(0, -100.5, -1), 100));
   hitable *world = new hitable_list(list, 2);
+  camera cam;
   for (auto j = ny - 1; j >= 0; j--)
   {
     for (int i = 0; i < nx; i++)
     {
-      auto u = float(i) / float(nx);
-      auto v = float(j) / float(ny);
-      ray r(origin, lower_left_corner + u * horizontal + v * vertical);
+      vec3 col(0, 0, 0);
+      for (int s = 0; s < ns; s++)
+      {
+        auto u = float(i + drand48()) / float(nx);
+        auto v = float(j + drand48()) / float(ny);
+        auto r = cam.get_ray(u, v);
+        col += color(r, world);
+      }
+      col /= float(ns);
 
-      vec3 col = color(r, world);
       auto ir = int(255.99 * col.e0);
       auto ig = int(255.99 * col.e1);
       auto ib = int(255.99 * col.e2);
